@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Torno Quest: el desafío del torno</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff0b8;--card:#fffdf5;--ink:#0f2747;--mut:#52617a;--acc:#ffb400;--blue:#2457d6;--ok:#13a350;--okbg:#d7f5e2;--bad:#d93a40;--badbg:#ffdede;--line:#0f2747;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1a30;--card:#15294a;--ink:#eef3fb;--mut:#a3b4cf;--acc:#ffc41f;--ok:#3ddc84;--okbg:#0f4029;--bad:#ff6b70;--badbg:#4d1f26;--line:#050b16}}
+:root[data-theme="dark"]{--bg:#0b1a30;--card:#15294a;--ink:#eef3fb;--mut:#a3b4cf;--acc:#ffc41f;--ok:#3ddc84;--okbg:#0f4029;--bad:#ff6b70;--badbg:#4d1f26;--line:#050b16}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;display:flex;padding:14px;font-family:'Fredoka','Trebuchet MS',system-ui,sans-serif;font-size:16px;line-height:1.35;color:var(--ink);background:radial-gradient(circle at 10% 6%,rgba(255,180,0,.25) 0 110px,transparent 111px) no-repeat,radial-gradient(circle at 95% 95%,rgba(36,87,214,.2) 0 140px,transparent 141px) no-repeat,var(--bg)}
+.app{width:100%;max-width:540px;margin:auto}
+.screen{animation:in .3s ease both}
+@keyframes in{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border:3px solid var(--line);border-radius:20px;box-shadow:5px 5px 0 var(--line);padding:18px;margin-bottom:16px}
+h1{font-size:clamp(36px,12vw,60px);line-height:.95;margin:0;letter-spacing:-.02em;text-shadow:3px 3px 0 var(--acc)}
+h2{font-size:clamp(20px,5.6vw,25px);line-height:1.2;margin:6px 0 10px}
+h3{margin:0 0 8px}
+p{margin:6px 0}
+.sub{color:var(--mut);font-weight:600}
+.hero{text-align:center}
+.hero::before{content:"";display:block;height:16px;margin:-18px -18px 16px;border-bottom:3px solid var(--line);border-radius:17px 17px 0 0;background:repeating-linear-gradient(-45deg,#ffb400 0 14px,#0f2747 14px 28px)}
+.gears{display:flex;justify-content:center;gap:14px;font-size:40px;margin-bottom:8px}
+.gears span{display:inline-block;animation:spin 6s linear infinite}
+.gears span:nth-child(2){animation-direction:reverse;animation-duration:4s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.info{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0}
+.info dt{color:var(--mut);font-weight:600}
+.info dd{margin:0;font-weight:700}
+.btn{display:block;width:100%;font:inherit;font-size:19px;font-weight:700;padding:14px 18px;border-radius:16px;border:3px solid var(--line);background:var(--acc);color:#0f2747;box-shadow:0 5px 0 var(--line);cursor:pointer;margin-bottom:10px;transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--line)}
+:focus-visible{outline:3px dashed var(--blue);outline-offset:3px}
+.top{display:flex;justify-content:space-between;gap:8px;margin-bottom:10px;font-weight:700}
+.chip{display:inline-block;background:var(--card);border:2px solid var(--line);border-radius:99px;padding:2px 12px;font-size:14px;font-weight:600}
+.bar{height:16px;border:3px solid var(--line);border-radius:99px;background:var(--card);overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--acc);border-right:3px solid var(--line);transition:width .5s}
+.ico{font-size:40px;line-height:1}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;margin:10px 0;padding:12px 14px;font:inherit;font-size:16px;font-weight:600;color:var(--ink);background:var(--card);border:3px solid var(--line);border-radius:16px;box-shadow:0 4px 0 var(--line);cursor:pointer;transition:transform .1s}
+.opt b{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:var(--blue);color:#fff;border:2px solid var(--line)}
+.opt:hover:not(:disabled){transform:translateY(-2px)}
+.opt:disabled{cursor:default}
+.opt:disabled:not(.ok):not(.bad){opacity:.55}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}
+.opt.bad{background:var(--badbg);border-color:var(--bad);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.fb{border:3px solid var(--line);border-radius:16px;padding:12px 14px;margin:14px 0 4px}
+.fb.ok{background:var(--okbg)}
+.fb.bad{background:var(--badbg)}
+.rules{padding-left:0;list-style:none;margin:0 0 12px}
+.rules li{margin:8px 0}
+.lab{display:block;font-weight:600;margin-bottom:4px}
+#nm{width:100%;font:inherit;padding:10px 12px;border:3px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink)}
+summary{cursor:pointer;font-weight:700}
+details .rk:first-of-type,details p:first-of-type{margin-top:10px}
+.rk{display:flex;align-items:center;gap:10px;padding:8px 10px;margin:6px 0;border:2px solid var(--line);border-radius:12px;opacity:.8}
+.rk b{flex:1;font-size:14px}
+.rk em{font-style:normal;font-size:13px;font-weight:700}
+.rk.me{opacity:1;background:var(--rc);color:#0f2747;box-shadow:3px 3px 0 var(--line)}
+.res{text-align:center;box-shadow:6px 6px 0 var(--rc)}
+.res h1{font-size:clamp(28px,8vw,40px);text-shadow:none}
+.big{font-size:84px;line-height:1.1;filter:drop-shadow(0 0 16px var(--rc));animation:pop 1.8s ease-in-out infinite}
+@keyframes pop{50%{transform:scale(1.12)}}
+.pct{font-size:68px;font-weight:700;line-height:1;margin-top:8px;color:var(--rc);text-shadow:3px 3px 0 var(--line)}
+.chad{background:var(--rc);color:#0f2747;border-color:var(--line);font-weight:700;margin-top:8px}
+.rev{padding:8px 0;border-bottom:2px dashed var(--mut)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app" id="app"></main>
+<script>
+const Q=[
+{i:"💡",q:"¿Quién creó el torno?",o:["Henry Maudslay, inventor e ingeniero británico","Christopher Spencer","David Wilkinson","James Watt"],e:"El torno fue creado por el inventor e ingeniero británico Henry Maudslay.",en:"Inventor = inventor, engineer = ingeniero"},
+{i:"📅",q:"¿En qué año se creó el torno?",o:["Entre 1797 y 1800","Entre 1873 y 1880","Entre 1650 y 1700","Entre 1950 y 1970"],e:"Maudslay lo desarrolló entre 1797 y 1800, en plena Revolución Industrial.",en:"Industrial Revolution = Revolución Industrial"},
+{i:"🗽",q:"¿Qué inventor de Estados Unidos prestó ayuda en el desarrollo del torno?",o:["David Wilkinson","Thomas Edison","Henry Ford","Benjamin Franklin"],e:"El inventor estadounidense David Wilkinson prestó ayuda en el desarrollo del torno.",en:"American = estadounidense, help = ayuda"},
+{i:"💂",q:"¿De qué nacionalidad era Henry Maudslay?",o:["Británico","Estadounidense","Alemán","Francés"],e:"Maudslay era británico: inventor e ingeniero del Reino Unido.",en:"British = británico"},
+{i:"🔧",q:"¿Qué inventó Henry Maudslay en el año 1797?",o:["El torno de roscar con carro portaherramientas","La máquina de vapor","El torno CNC multieje","La fresadora automática"],e:"En 1797 inventó el torno de roscar con carro portaherramientas, llamado en inglés screw cutting lathe.",en:"Screw cutting lathe = torno de roscar"},
+{i:"🏰",q:"¿En qué país fue creado el torno de roscar de 1797?",o:["Inglaterra (Reino Unido)","Estados Unidos","Alemania","Francia"],e:"Se creó en Inglaterra (Reino Unido), el país donde arrancó la Revolución Industrial.",en:"England = Inglaterra, United Kingdom = Reino Unido"},
+{i:"🤖",q:"¿Quién logró automatizar la mecánica del torno?",o:["Christopher Spencer","Henry Maudslay","David Wilkinson","James Watt"],e:"Christopher Spencer logró automatizar la mecánica del torno.",en:"To automate = automatizar"},
+{i:"⏱️",q:"¿En qué año se logró automatizar la mecánica del torno?",o:["1873","1797","1912","1965"],e:"Fue en 1873, más de 70 años después del torno de roscar de Maudslay.",en:"Year = año"},
+{i:"💻",q:"¿Qué tipo de tornos se utilizan en la actualidad?",o:["Tornos CNC multieje totalmente computarizados","Tornos a pedal de madera","Tornos movidos con cuerda y arco","Tornos a vapor con correas"],e:"Hoy se usan tornos CNC multieje, totalmente computarizados.",en:"Multi-axis = multieje"},
+{i:"🏭",q:"¿Durante qué gran evento histórico-económico se desarrolló el torno?",o:["La Revolución Industrial","La Gran Depresión","La Guerra Fría","La Revolución Digital"],e:"Se desarrolló durante la Revolución Industrial, cuando las máquinas empezaron a reemplazar el trabajo manual.",en:"Industrial Revolution = Revolución Industrial"},
+{i:"🖥️",q:"¿Qué significa que los tornos actuales sean “CNC”?",o:["Que son tornos totalmente computarizados","Que funcionan solo a mano","Que se mueven con vapor","Que son tornos de madera"],e:"CNC viene de Computer Numerical Control (control numérico computarizado): una computadora comanda los movimientos del torno.",en:"CNC = Computer Numerical Control"}
+];
+const R=[
+{min:100,n:"Aura Celestial / Divina",e:"👑",r:"100%",c:"#ffc400",m:"¡Perfecto! Sos el maestro absoluto del torno. Hasta la bancada se inclina ante vos."},
+{min:85,n:"Aura Legendaria",e:"✨",r:"85 a 99%",c:"#ff7a1a",t:"CHAD",m:"Nivel CHAD del taller. Un error más y tocabas el cielo."},
+{min:70,n:"Aura Mística",e:"✨",r:"70 a 84%",c:"#a45cff",m:"Dominás el torno casi con magia. Pulí los detalles y subís."},
+{min:60,n:"Aura Despierta",e:"🌟",r:"60 a 69%",c:"#18c3d6",m:"Tu aura está despertando. Un repaso más y subís de nivel."},
+{min:35,n:"Aura Común",e:"🌀",r:"35 a 59%",c:"#8fa0bd",m:"Aura común. Repasá las partes del torno y volvé por la revancha."},
+{min:0,n:"Aura Extinta / Sin Aura",e:"☠️",r:"0 a 34%",c:"#e5484d",m:"Tu aura se apagó… Al taller a estudiar y después, ¡revancha!"}
+];
+const $=s=>document.querySelector(s),app=$("#app"),L="ABCD";
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let i=0,ok=0,pts=0,streak=0,name="",miss=[],locked=false,order=[];
+const show=h=>{app.innerHTML='<div class="screen">'+h+"</div>";window.scrollTo(0,0)};
+const score=()=>"⭐ "+pts+(streak>1?" 🔥 x"+streak:"");
+const ladder=c=>R.map((x,n)=>`<div class="rk${n===c?" me":""}" style="--rc:${x.c}"><span>${x.e}</span><b>${x.n}${x.t?" (nivel "+x.t+")":""}</b><em>${x.r}</em></div>`).join("");
+
+function cover(){show(`<div class="card hero"><div class="gears" aria-hidden="true"><span>⚙️</span><span>🔧</span><span>⚙️</span></div><h1>Torno<br>Quest</h1><p class="sub">El desafío del torno: 11 preguntas sobre su historia y un rango de aura</p></div>
+<div class="card"><dl class="info"><dt>Materia</dt><dd>English</dd><dt>Profesora</dt><dd>María Luz Ontivero</dd><dt>Alumnos</dt><dd>Torrez Leonel<br>Torres Alejo<br>Remisink Alex<br>Moretti Uriel</dd><dt>Curso</dt><dd>4°4°</dd><dt>Año</dt><dd>2026</dd><dt>Tema</dt><dd>Devices or Machines and Their History</dd></dl></div>
+<button class="btn" data-a="brief">Empezar</button>`)}
+
+function ask(){
+ const q=Q[i];locked=false;order=q.o.map((_,k)=>k);
+ if(order.length>2)for(let k=order.length-1;k>0;k--){const j=Math.random()*(k+1)|0;[order[k],order[j]]=[order[j],order[k]]}
+ show(`<div class="top"><span class="chip">Pregunta ${i+1} de ${Q.length}</span><span class="chip" id="sc">${score()}</span></div>
+<div class="bar"><i style="width:${i/Q.length*100}%"></i></div>
+<div class="card"><div class="ico">${q.i}</div><h2>${q.q}</h2>${order.map((k,n)=>`<button class="opt" data-a="pick" data-k="${k}"><b>${L[n]}</b><span>${q.o[k]}</span></button>`).join("")}<div id="fb"></div></div>`)}
+
+const act={
+ brief(){show(`<div class="card"><h2>Cómo se juega 🎮</h2><ul class="rules"><li>🧩 <b>11 preguntas</b> de opción múltiple sobre la historia del torno, una por pantalla.</li><li>⚡ Tocá tu respuesta y mirá al instante si acertaste.</li><li>🏆 Al final te toca un <b>rango de aura</b>. ¿Llegás a 👑 Celestial?</li></ul><label class="lab" for="nm">Tu apodo (opcional)</label><input id="nm" maxlength="18" placeholder="Ej: Maquinista Pro" autocomplete="off"></div>
+<details class="card"><summary>🔮 Ver los rangos</summary>${ladder(-1)}</details><button class="btn" data-a="start">¡Vamos!</button>`)},
+ start(){name=($("#nm").value||"").trim();i=ok=pts=streak=0;miss=[];ask()},
+ pick(b){
+  if(locked)return;locked=true;
+  const q=Q[i],good=+b.dataset.k===0,last=i===Q.length-1;
+  document.querySelectorAll(".opt").forEach(o=>{o.disabled=true;if(+o.dataset.k===0)o.classList.add("ok")});
+  if(good){ok++;pts+=100;streak++}else{streak=0;miss.push(i);b.classList.add("bad")}
+  $("#sc").textContent=score();
+  if(navigator.vibrate)navigator.vibrate(good?25:[50,40,50]);
+  $("#fb").innerHTML=`<div class="fb ${good?"ok":"bad"}"><strong>${good?"¡Correcto! +100 ⭐":"¡Uy! La correcta era la "+L[order.indexOf(0)]}</strong><p>${q.e}</p><span class="chip">🇬🇧 ${q.en}</span></div><button class="btn" data-a="next">${last?"🏆 Ver mi rango":"Siguiente ▶"}</button>`;
+  const nb=$("[data-a=next]");nb.focus({preventScroll:true});nb.scrollIntoView({behavior:"smooth",block:"nearest"})},
+ next(){++i<Q.length?ask():end()},
+ again(){cover()}
+};
+
+function end(){
+ const raw=ok/Q.length*100,ri=R.findIndex(x=>raw>=x.min),r=R[ri];
+ show(`<div class="card res" style="--rc:${r.c}"><p class="sub">${name?"¡Bien jugado, "+esc(name)+"!":"¡Terminaste el desafío!"}</p><div class="big">${r.e}</div><h1>${r.n}</h1>${r.t?`<span class="chip chad">Nivel ${r.t}</span>`:""}<div class="pct">${Math.round(raw)}%</div><p class="sub">${ok} de ${Q.length} correctas, ⭐ ${pts}</p><p><b>${r.m}</b></p></div>
+<div class="card"><h3>🏅 Tabla de rangos</h3>${ladder(ri)}</div>
+${miss.length?`<details class="card"><summary>📚 Repasar mis errores (${miss.length})</summary>${miss.map(m=>`<p class="rev"><b>${Q[m].q}</b><br>✅ ${Q[m].o[0]}</p>`).join("")}</details>`:""}
+<div class="card">🕰️ <b>Línea de tiempo del torno</b><br>1797 a 1800: Henry Maudslay (Inglaterra) crea el torno de roscar con carro portaherramientas, con ayuda de David Wilkinson.<br>1873: Christopher Spencer automatiza la mecánica del torno.<br>Hoy: tornos CNC multieje, totalmente computarizados.</div>
+<button class="btn" data-a="again">🔁 Jugar de nuevo</button>`)}
+
+app.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b)act[b.dataset.a](b)});
+addEventListener("keydown",e=>{if(e.key.length!==1)return;let n="1234".indexOf(e.key);if(n<0)n="abcd".indexOf(e.key.toLowerCase());const b=document.querySelectorAll(".opt")[n];if(n>-1&&b&&!b.disabled)b.click()});
+cover();
+</script>
+</body>
+</html>
