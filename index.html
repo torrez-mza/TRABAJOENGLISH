@@ -73,17 +73,18 @@ details .rk:first-of-type,details p:first-of-type{margin-top:10px}
 <main class="app" id="app"></main>
 <script>
 const Q=[
-{i:"💡",q:"¿Quién creó el torno?",o:["Henry Maudslay, inventor e ingeniero británico","Christopher Spencer","David Wilkinson","James Watt"],e:"El torno fue creado por el inventor e ingeniero británico Henry Maudslay.",en:"Inventor = inventor, engineer = ingeniero"},
-{i:"📅",q:"¿En qué año se creó el torno?",o:["Entre 1797 y 1800","Entre 1873 y 1880","Entre 1650 y 1700","Entre 1950 y 1970"],e:"Maudslay lo desarrolló entre 1797 y 1800, en plena Revolución Industrial.",en:"Industrial Revolution = Revolución Industrial"},
-{i:"🗽",q:"¿Qué inventor de Estados Unidos prestó ayuda en el desarrollo del torno?",o:["David Wilkinson","Thomas Edison","Henry Ford","Benjamin Franklin"],e:"El inventor estadounidense David Wilkinson prestó ayuda en el desarrollo del torno.",en:"American = estadounidense, help = ayuda"},
-{i:"💂",q:"¿De qué nacionalidad era Henry Maudslay?",o:["Británico","Estadounidense","Alemán","Francés"],e:"Maudslay era británico: inventor e ingeniero del Reino Unido.",en:"British = británico"},
-{i:"🔧",q:"¿Qué inventó Henry Maudslay en el año 1797?",o:["El torno de roscar con carro portaherramientas","La máquina de vapor","El torno CNC multieje","La fresadora automática"],e:"En 1797 inventó el torno de roscar con carro portaherramientas, llamado en inglés screw cutting lathe.",en:"Screw cutting lathe = torno de roscar"},
-{i:"🏰",q:"¿En qué país fue creado el torno de roscar de 1797?",o:["Inglaterra (Reino Unido)","Estados Unidos","Alemania","Francia"],e:"Se creó en Inglaterra (Reino Unido), el país donde arrancó la Revolución Industrial.",en:"England = Inglaterra, United Kingdom = Reino Unido"},
-{i:"🤖",q:"¿Quién logró automatizar la mecánica del torno?",o:["Christopher Spencer","Henry Maudslay","David Wilkinson","James Watt"],e:"Christopher Spencer logró automatizar la mecánica del torno.",en:"To automate = automatizar"},
-{i:"⏱️",q:"¿En qué año se logró automatizar la mecánica del torno?",o:["1873","1797","1912","1965"],e:"Fue en 1873, más de 70 años después del torno de roscar de Maudslay.",en:"Year = año"},
-{i:"💻",q:"¿Qué tipo de tornos se utilizan en la actualidad?",o:["Tornos CNC multieje totalmente computarizados","Tornos a pedal de madera","Tornos movidos con cuerda y arco","Tornos a vapor con correas"],e:"Hoy se usan tornos CNC multieje, totalmente computarizados.",en:"Multi-axis = multieje"},
-{i:"🏭",q:"¿Durante qué gran evento histórico-económico se desarrolló el torno?",o:["La Revolución Industrial","La Gran Depresión","La Guerra Fría","La Revolución Digital"],e:"Se desarrolló durante la Revolución Industrial, cuando las máquinas empezaron a reemplazar el trabajo manual.",en:"Industrial Revolution = Revolución Industrial"},
-{i:"🖥️",q:"¿Qué significa que los tornos actuales sean “CNC”?",o:["Que son tornos totalmente computarizados","Que funcionan solo a mano","Que se mueven con vapor","Que son tornos de madera"],e:"CNC viene de Computer Numerical Control (control numérico computarizado): una computadora comanda los movimientos del torno.",en:"CNC = Computer Numerical Control"}
+{i:"🔁",q:"¿Qué característica técnica única tiene el torno en la industria?",o:["Es la única máquina capaz de reproducirse a sí misma","Es la única máquina que funciona sin energía","Es la única máquina que no necesita herramientas","Es la única máquina que trabaja sola, sin operario"],e:"Con un torno se pueden fabricar todas las piezas mecánicas necesarias para construir otro torno idéntico.",en:"Self-reproducing machine = máquina autoreproductiva"},
+{i:"🏺",q:"¿En qué época situa el folleto el torno del Antiguo Egipto?",o:["Siglo IX a.C.","Siglo XVIII d.C.","Siglo I d.C.","Siglo XX d.C."],e:"El folleto indica que en el Antiguo Egipto, en el siglo IX a.C., ya se usaba el torno.",en:"Ancient Egypt = Antiguo Egipto"},
+{i:"👥",q:"¿Cuántas personas operaban el torno en el Antiguo Egipto?",o:["Dos personas","Una persona","Cuatro personas","Diez personas"],e:"Una persona giraba la pieza con una cuerda tensa y la otra cortaba la madera o el metal con un buril.",en:"Rope = cuerda, tool = herramienta"},
+{i:"⚙️",q:"¿Qué tipo de máquina es el torno?",o:["Una máquina herramienta de mecanizado por arranque de viruta","Una máquina de soldadura por arco","Una máquina de fundición de metales","Una máquina de prensado de chapas"],e:"El torno es una máquina herramienta de mecanizado por arranque de viruta.",en:"Chip-removal machining = mecanizado por arranque de viruta"},
+{i:"🔩",q:"¿Qué tipo de piezas se moldean en el torno?",o:["Piezas cilíndricas","Piezas rectangulares","Chapas planas","Piezas cúbicas"],e:"Se usa para moldear piezas cilíndricas mediante el giro de la pieza contra una herramienta de corte fija.",en:"Cylindrical workpieces = piezas cilíndricas"},
+{i:"📉",q:"¿Qué operación del torno reduce el diámetro exterior de la pieza?",o:["Cilindrado","Refrentado","Roscado","Taladrado"],e:"El cilindrado reduce el diámetro exterior de la pieza.",en:"Turning = cilindrado"},
+{i:"🪞",q:"¿Qué operación deja plana la cara frontal de la pieza?",o:["Refrentado","Cilindrado","Taladrado","Roscado"],e:"El refrentado deja plana la cara frontal.",en:"Facing = refrentado"},
+{i:"🎚️",q:"¿Para qué sirve la Caja Norton?",o:["Regula las velocidades de avance y el paso para tallar roscas mecánicas","Sostiene las piezas largas","Sujeta y transmite el giro","Es la guía de fundición de los carros"],e:"La Caja Norton regula las velocidades de avance y el paso para tallar roscas mecánicas.",en:"Threading = roscado"},
+{i:"🌀",q:"¿Qué partes del torno sujetan y transmiten el giro?",o:["El plato y el husillo","La bancada","El contrapunto","La Caja Norton"],e:"El plato y el husillo sujetan y transmiten el giro.",en:"Spindle = husillo"},
+{i:"🛤️",q:"¿Qué función cumple la bancada?",o:["Es la guía de fundición para los carros","Sostiene piezas largas","Sujeta y transmite el giro","Regula las velocidades de avance"],e:"La bancada es la guía de fundición para los carros.",en:"Bed = bancada"},
+{i:"📏",q:"¿Para qué se usa el contrapunto?",o:["Para sostener piezas largas","Para transmitir el giro","Para remover viruta","Para regular el paso de las roscas"],e:"El contrapunto sostiene piezas largas.",en:"Tailstock = contrapunto"},
+{i:"🔪",q:"¿Cómo se llama la cuchilla que remueve la viruta mientras la pieza gira?",o:["Buril","Husillo","Plato","Bancada"],e:"El torno hace girar la pieza mientras una cuchilla (buril) remueve viruta con alta precisión.",en:"Cutting tool = herramienta de corte"}
 ];
 const R=[
 {min:100,n:"Aura Celestial / Divina",e:"👑",r:"100%",c:"#ffc400",m:"¡Perfecto! Sos el maestro absoluto del torno. Hasta la bancada se inclina ante vos."},
@@ -100,8 +101,8 @@ const show=h=>{app.innerHTML='<div class="screen">'+h+"</div>";window.scrollTo(0
 const score=()=>"⭐ "+pts+(streak>1?" 🔥 x"+streak:"");
 const ladder=c=>R.map((x,n)=>`<div class="rk${n===c?" me":""}" style="--rc:${x.c}"><span>${x.e}</span><b>${x.n}${x.t?" (nivel "+x.t+")":""}</b><em>${x.r}</em></div>`).join("");
 
-function cover(){show(`<div class="card hero"><div class="gears" aria-hidden="true"><span>⚙️</span><span>🔧</span><span>⚙️</span></div><h1>Torno<br>Quest</h1><p class="sub">El desafío del torno: 11 preguntas sobre su historia y un rango de aura</p></div>
-<div class="card"><dl class="info"><dt>Materia</dt><dd>English</dd><dt>Profesora</dt><dd>María Luz Ontivero</dd><dt>Alumnos</dt><dd>Torrez Leonel<br>Torres Alejo<br>Remisink Alex<br>Moretti Uriel</dd><dt>Curso</dt><dd>4°4°</dd><dt>Año</dt><dd>2026</dd><dt>Tema</dt><dd>Devices or Machines and Their History</dd></dl></div>
+function cover(){show(`<div class="card hero"><div class="gears" aria-hidden="true"><span>⚙️</span><span>🔧</span><span>⚙️</span></div><h1>Torno<br>Quest</h1><p class="sub">El desafío del torno: ${Q.length} preguntas sacadas del folleto y un rango de aura</p></div>
+<div class="card"><dl class="info"><dt>Materia</dt><dd>English</dd><dt>Profesora</dt><dd>María Luz Ontivero</dd><dt>Alumnos</dt><dd>Torrez Leonel<br>Torres Alejo<br>Remisink Alex<br>Moretti Uriel</dd><dt>Curso</dt><dd>4°4°</dd><dt>Año</dt><dd>2026</dd><dt>Tema</dt><dd>El Torno / The Lathe: historia, componentes y usos técnicos</dd></dl></div>
 <button class="btn" data-a="brief">Empezar</button>`)}
 
 function ask(){
@@ -112,7 +113,7 @@ function ask(){
 <div class="card"><div class="ico">${q.i}</div><h2>${q.q}</h2>${order.map((k,n)=>`<button class="opt" data-a="pick" data-k="${k}"><b>${L[n]}</b><span>${q.o[k]}</span></button>`).join("")}<div id="fb"></div></div>`)}
 
 const act={
- brief(){show(`<div class="card"><h2>Cómo se juega 🎮</h2><ul class="rules"><li>🧩 <b>11 preguntas</b> de opción múltiple sobre la historia del torno, una por pantalla.</li><li>⚡ Tocá tu respuesta y mirá al instante si acertaste.</li><li>🏆 Al final te toca un <b>rango de aura</b>. ¿Llegás a 👑 Celestial?</li></ul><label class="lab" for="nm">Tu apodo (opcional)</label><input id="nm" maxlength="18" placeholder="Ej: Maquinista Pro" autocomplete="off"></div>
+ brief(){show(`<div class="card"><h2>Cómo se juega 🎮</h2><ul class="rules"><li>📖 Tené a mano el <b>folleto del torno</b>: todas las respuestas están ahí.</li><li>🧩 <b>${Q.length} preguntas</b> de opción múltiple, una por pantalla.</li><li>⚡ Tocá tu respuesta y mirá al instante si acertaste.</li><li>🏆 Al final te toca un <b>rango de aura</b>. ¿Llegás a 👑 Celestial?</li></ul><label class="lab" for="nm">Tu apodo (opcional)</label><input id="nm" maxlength="18" placeholder="Ej: Maquinista Pro" autocomplete="off"></div>
 <details class="card"><summary>🔮 Ver los rangos</summary>${ladder(-1)}</details><button class="btn" data-a="start">¡Vamos!</button>`)},
  start(){name=($("#nm").value||"").trim();i=ok=pts=streak=0;miss=[];ask()},
  pick(b){
@@ -133,7 +134,7 @@ function end(){
  show(`<div class="card res" style="--rc:${r.c}"><p class="sub">${name?"¡Bien jugado, "+esc(name)+"!":"¡Terminaste el desafío!"}</p><div class="big">${r.e}</div><h1>${r.n}</h1>${r.t?`<span class="chip chad">Nivel ${r.t}</span>`:""}<div class="pct">${Math.round(raw)}%</div><p class="sub">${ok} de ${Q.length} correctas, ⭐ ${pts}</p><p><b>${r.m}</b></p></div>
 <div class="card"><h3>🏅 Tabla de rangos</h3>${ladder(ri)}</div>
 ${miss.length?`<details class="card"><summary>📚 Repasar mis errores (${miss.length})</summary>${miss.map(m=>`<p class="rev"><b>${Q[m].q}</b><br>✅ ${Q[m].o[0]}</p>`).join("")}</details>`:""}
-<div class="card">🕰️ <b>Línea de tiempo del torno</b><br>1797 a 1800: Henry Maudslay (Inglaterra) crea el torno de roscar con carro portaherramientas, con ayuda de David Wilkinson.<br>1873: Christopher Spencer automatiza la mecánica del torno.<br>Hoy: tornos CNC multieje, totalmente computarizados.</div>
+<div class="card">🔁 <b>Dato curioso del folleto</b><br>El torno es la única máquina capaz de reproducirse a sí misma: con un torno se pueden fabricar las piezas para construir otro torno idéntico.</div>
 <button class="btn" data-a="again">🔁 Jugar de nuevo</button>`)}
 
 app.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b)act[b.dataset.a](b)});
