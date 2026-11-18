@@ -1,145 +1,1090 @@
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Torno Quest: el desafío del torno</title>
+<title>Lathe Quest: The Lathe Challenge</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#fff0b8;--card:#fffdf5;--ink:#0f2747;--mut:#52617a;--acc:#ffb400;--blue:#2457d6;--ok:#13a350;--okbg:#d7f5e2;--bad:#d93a40;--badbg:#ffdede;--line:#0f2747;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1a30;--card:#15294a;--ink:#eef3fb;--mut:#a3b4cf;--acc:#ffc41f;--ok:#3ddc84;--okbg:#0f4029;--bad:#ff6b70;--badbg:#4d1f26;--line:#050b16}}
-:root[data-theme="dark"]{--bg:#0b1a30;--card:#15294a;--ink:#eef3fb;--mut:#a3b4cf;--acc:#ffc41f;--ok:#3ddc84;--okbg:#0f4029;--bad:#ff6b70;--badbg:#4d1f26;--line:#050b16}
+:root{
+--bg:#fff0b8;
+--card:#fffdf5;
+--ink:#0f2747;
+--mut:#52617a;
+--acc:#ffb400;
+--blue:#2457d6;
+--ok:#13a350;
+--okbg:#d7f5e2;
+--bad:#d93a40;
+--badbg:#ffdede;
+--line:#0f2747;
+box-sizing:border-box;
+padding-top:env(safe-area-inset-top,0px);
+padding-bottom:env(safe-area-inset-bottom,0px)
+}
+
+@media(prefers-color-scheme:dark){
+:root:not([data-theme="light"]){
+--bg:#0b1a30;
+--card:#15294a;
+--ink:#eef3fb;
+--mut:#a3b4cf;
+--acc:#ffc41f;
+--ok:#3ddc84;
+--okbg:#0f4029;
+--bad:#ff6b70;
+--badbg:#4d1f26;
+--line:#050b16
+}}
+
+:root[data-theme="dark"]{
+--bg:#0b1a30;
+--card:#15294a;
+--ink:#eef3fb;
+--mut:#a3b4cf;
+--acc:#ffc41f;
+--ok:#3ddc84;
+--okbg:#0f4029;
+--bad:#ff6b70;
+--badbg:#4d1f26;
+--line:#050b16
+}
+
 *{box-sizing:border-box}
-html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;min-height:100%;display:flex;padding:14px;font-family:'Fredoka','Trebuchet MS',system-ui,sans-serif;font-size:16px;line-height:1.35;color:var(--ink);background:radial-gradient(circle at 10% 6%,rgba(255,180,0,.25) 0 110px,transparent 111px) no-repeat,radial-gradient(circle at 95% 95%,rgba(36,87,214,.2) 0 140px,transparent 141px) no-repeat,var(--bg)}
-.app{width:100%;max-width:540px;margin:auto}
+
+html{
+height:100%;
+scroll-padding-top:env(safe-area-inset-top,0px)
+}
+
+body{
+margin:0;
+min-height:100%;
+display:flex;
+padding:14px;
+font-family:'Fredoka','Trebuchet MS',system-ui,sans-serif;
+font-size:16px;
+line-height:1.4;
+color:var(--ink);
+background:
+radial-gradient(circle at 10% 6%,rgba(255,180,0,.25) 0 110px,transparent 111px) no-repeat,
+radial-gradient(circle at 95% 95%,rgba(36,87,214,.2) 0 140px,transparent 141px) no-repeat,
+var(--bg)
+}
+
+.app{
+width:100%;
+max-width:540px;
+margin:auto
+}
+
 .screen{animation:in .3s ease both}
-@keyframes in{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
-.card{background:var(--card);border:3px solid var(--line);border-radius:20px;box-shadow:5px 5px 0 var(--line);padding:18px;margin-bottom:16px}
-h1{font-size:clamp(36px,12vw,60px);line-height:.95;margin:0;letter-spacing:-.02em;text-shadow:3px 3px 0 var(--acc)}
-h2{font-size:clamp(20px,5.6vw,25px);line-height:1.2;margin:6px 0 10px}
+
+@keyframes in{
+from{opacity:0;transform:translateX(36px)}
+to{opacity:1;transform:none}
+}
+
+.card{
+background:var(--card);
+border:3px solid var(--line);
+border-radius:20px;
+box-shadow:5px 5px 0 var(--line);
+padding:18px;
+margin-bottom:16px
+}
+
+h1{
+font-size:clamp(36px,12vw,60px);
+line-height:.95;
+margin:0;
+letter-spacing:-.02em;
+text-shadow:3px 3px 0 var(--acc)
+}
+
+h2{
+font-size:clamp(20px,5.6vw,25px);
+line-height:1.2;
+margin:6px 0 10px
+}
+
 h3{margin:0 0 8px}
 p{margin:6px 0}
-.sub{color:var(--mut);font-weight:600}
+
+.sub{
+color:var(--mut);
+font-weight:600
+}
+
 .hero{text-align:center}
-.hero::before{content:"";display:block;height:16px;margin:-18px -18px 16px;border-bottom:3px solid var(--line);border-radius:17px 17px 0 0;background:repeating-linear-gradient(-45deg,#ffb400 0 14px,#0f2747 14px 28px)}
-.gears{display:flex;justify-content:center;gap:14px;font-size:40px;margin-bottom:8px}
-.gears span{display:inline-block;animation:spin 6s linear infinite}
-.gears span:nth-child(2){animation-direction:reverse;animation-duration:4s}
+
+.hero::before{
+content:"";
+display:block;
+height:16px;
+margin:-18px -18px 16px;
+border-bottom:3px solid var(--line);
+border-radius:17px 17px 0 0;
+background:repeating-linear-gradient(-45deg,#ffb400 0 14px,#0f2747 14px 28px)
+}
+
+.gears{
+display:flex;
+justify-content:center;
+gap:14px;
+font-size:40px;
+margin-bottom:8px
+}
+
+.gears span{
+display:inline-block;
+animation:spin 6s linear infinite
+}
+
+.gears span:nth-child(2){
+animation-direction:reverse;
+animation-duration:4s
+}
+
 @keyframes spin{to{transform:rotate(360deg)}}
-.info{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0}
-.info dt{color:var(--mut);font-weight:600}
-.info dd{margin:0;font-weight:700}
-.btn{display:block;width:100%;font:inherit;font-size:19px;font-weight:700;padding:14px 18px;border-radius:16px;border:3px solid var(--line);background:var(--acc);color:#0f2747;box-shadow:0 5px 0 var(--line);cursor:pointer;margin-bottom:10px;transition:transform .08s,box-shadow .08s}
-.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--line)}
-:focus-visible{outline:3px dashed var(--blue);outline-offset:3px}
-.top{display:flex;justify-content:space-between;gap:8px;margin-bottom:10px;font-weight:700}
-.chip{display:inline-block;background:var(--card);border:2px solid var(--line);border-radius:99px;padding:2px 12px;font-size:14px;font-weight:600}
-.bar{height:16px;border:3px solid var(--line);border-radius:99px;background:var(--card);overflow:hidden;margin-bottom:14px}
-.bar i{display:block;height:100%;background:var(--acc);border-right:3px solid var(--line);transition:width .5s}
-.ico{font-size:40px;line-height:1}
-.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;margin:10px 0;padding:12px 14px;font:inherit;font-size:16px;font-weight:600;color:var(--ink);background:var(--card);border:3px solid var(--line);border-radius:16px;box-shadow:0 4px 0 var(--line);cursor:pointer;transition:transform .1s}
-.opt b{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:var(--blue);color:#fff;border:2px solid var(--line)}
+
+.info{
+display:grid;
+grid-template-columns:auto 1fr;
+gap:8px 14px;
+margin:0
+}
+
+.info dt{
+color:var(--mut);
+font-weight:600
+}
+
+.info dd{
+margin:0;
+font-weight:700
+}
+
+.btn{
+display:block;
+width:100%;
+font:inherit;
+font-size:19px;
+font-weight:700;
+padding:14px 18px;
+border-radius:16px;
+border:3px solid var(--line);
+background:var(--acc);
+color:#0f2747;
+box-shadow:0 5px 0 var(--line);
+cursor:pointer;
+margin-bottom:10px;
+transition:transform .08s,box-shadow .08s
+}
+
+.btn:active{
+transform:translateY(4px);
+box-shadow:0 1px 0 var(--line)
+}
+
+:focus-visible{
+outline:3px dashed var(--blue);
+outline-offset:3px
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+gap:8px;
+margin-bottom:10px;
+font-weight:700
+}
+
+.chip{
+display:inline-block;
+background:var(--card);
+border:2px solid var(--line);
+border-radius:99px;
+padding:2px 12px;
+font-size:14px;
+font-weight:600
+}
+
+.bar{
+height:16px;
+border:3px solid var(--line);
+border-radius:99px;
+background:var(--card);
+overflow:hidden;
+margin-bottom:14px
+}
+
+.bar i{
+display:block;
+height:100%;
+background:var(--acc);
+border-right:3px solid var(--line);
+transition:width .5s
+}
+
+.ico{
+font-size:40px;
+line-height:1
+}
+
+.opt{
+display:flex;
+gap:12px;
+align-items:center;
+text-align:left;
+width:100%;
+margin:10px 0;
+padding:12px 14px;
+font:inherit;
+font-size:16px;
+font-weight:600;
+color:var(--ink);
+background:var(--card);
+border:3px solid var(--line);
+border-radius:16px;
+box-shadow:0 4px 0 var(--line);
+cursor:pointer;
+transition:transform .1s
+}
+
+.opt b{
+flex:none;
+width:32px;
+height:32px;
+display:grid;
+place-items:center;
+border-radius:10px;
+background:var(--blue);
+color:#fff;
+border:2px solid var(--line)
+}
+
 .opt:hover:not(:disabled){transform:translateY(-2px)}
 .opt:disabled{cursor:default}
 .opt:disabled:not(.ok):not(.bad){opacity:.55}
-.opt.ok{background:var(--okbg);border-color:var(--ok)}
-.opt.bad{background:var(--badbg);border-color:var(--bad);animation:shake .35s}
-@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.fb{border:3px solid var(--line);border-radius:16px;padding:12px 14px;margin:14px 0 4px}
+
+.opt.ok{
+background:var(--okbg);
+border-color:var(--ok)
+}
+
+.opt.bad{
+background:var(--badbg);
+border-color:var(--bad);
+animation:shake .35s
+}
+
+@keyframes shake{
+25%{transform:translateX(-6px)}
+75%{transform:translateX(6px)}
+}
+
+.fb{
+border:3px solid var(--line);
+border-radius:16px;
+padding:12px 14px;
+margin:14px 0 4px
+}
+
 .fb.ok{background:var(--okbg)}
 .fb.bad{background:var(--badbg)}
-.rules{padding-left:0;list-style:none;margin:0 0 12px}
-.rules li{margin:8px 0}
-.lab{display:block;font-weight:600;margin-bottom:4px}
-#nm{width:100%;font:inherit;padding:10px 12px;border:3px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink)}
-summary{cursor:pointer;font-weight:700}
-details .rk:first-of-type,details p:first-of-type{margin-top:10px}
-.rk{display:flex;align-items:center;gap:10px;padding:8px 10px;margin:6px 0;border:2px solid var(--line);border-radius:12px;opacity:.8}
-.rk b{flex:1;font-size:14px}
-.rk em{font-style:normal;font-size:13px;font-weight:700}
-.rk.me{opacity:1;background:var(--rc);color:#0f2747;box-shadow:3px 3px 0 var(--line)}
-.res{text-align:center;box-shadow:6px 6px 0 var(--rc)}
-.res h1{font-size:clamp(28px,8vw,40px);text-shadow:none}
-.big{font-size:84px;line-height:1.1;filter:drop-shadow(0 0 16px var(--rc));animation:pop 1.8s ease-in-out infinite}
-@keyframes pop{50%{transform:scale(1.12)}}
-.pct{font-size:68px;font-weight:700;line-height:1;margin-top:8px;color:var(--rc);text-shadow:3px 3px 0 var(--line)}
-.chad{background:var(--rc);color:#0f2747;border-color:var(--line);font-weight:700;margin-top:8px}
-.rev{padding:8px 0;border-bottom:2px dashed var(--mut)}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.rules{
+padding-left:0;
+list-style:none;
+margin:0 0 12px
+}
+
+.rules li{margin:10px 0}
+
+.lab{
+display:block;
+font-weight:600;
+margin-bottom:4px
+}
+
+#nm{
+width:100%;
+font:inherit;
+padding:10px 12px;
+border:3px solid var(--line);
+border-radius:12px;
+background:var(--card);
+color:var(--ink)
+}
+
+summary{
+cursor:pointer;
+font-weight:700
+}
+
+details .rk:first-of-type,
+details p:first-of-type{margin-top:10px}
+
+.rk{
+display:flex;
+align-items:center;
+gap:10px;
+padding:8px 10px;
+margin:6px 0;
+border:2px solid var(--line);
+border-radius:12px;
+opacity:.8
+}
+
+.rk b{
+flex:1;
+font-size:14px
+}
+
+.rk em{
+font-style:normal;
+font-size:13px;
+font-weight:700
+}
+
+.rk.me{
+opacity:1;
+background:var(--rc);
+color:#0f2747;
+box-shadow:3px 3px 0 var(--line)
+}
+
+.res{
+text-align:center;
+box-shadow:6px 6px 0 var(--rc)
+}
+
+.res h1{
+font-size:clamp(28px,8vw,40px);
+text-shadow:none
+}
+
+.big{
+font-size:84px;
+line-height:1.1;
+filter:drop-shadow(0 0 16px var(--rc));
+animation:pop 1.8s ease-in-out infinite
+}
+
+@keyframes pop{
+50%{transform:scale(1.12)}
+}
+
+.pct{
+font-size:68px;
+font-weight:700;
+line-height:1;
+margin-top:8px;
+color:var(--rc);
+text-shadow:3px 3px 0 var(--line)
+}
+
+.chad{
+background:var(--rc);
+color:#0f2747;
+border-color:var(--line);
+font-weight:700;
+margin-top:8px
+}
+
+.rev{
+padding:8px 0;
+border-bottom:2px dashed var(--mut)
+}
+
+.en{
+display:block;
+font-weight:700;
+margin-bottom:4px
+}
+
+.es{
+display:block;
+color:var(--mut);
+font-weight:600;
+font-size:.94em
+}
+
+.question-text .es{
+margin-top:7px;
+color:var(--mut)
+}
+
+.opt .words{
+display:block;
+flex:1
+}
+
+@media(prefers-reduced-motion:reduce){
+*{animation:none!important;transition:none!important}
+}
 </style>
 </head>
-<body>
-<main class="app" id="app"></main>
-<script>
-const Q=[
-{i:"🔁",q:"¿Qué característica técnica única tiene el torno en la industria?",o:["Es la única máquina capaz de reproducirse a sí misma","Es la única máquina que funciona sin energía","Es la única máquina que no necesita herramientas","Es la única máquina que trabaja sola, sin operario"],e:"Con un torno se pueden fabricar todas las piezas mecánicas necesarias para construir otro torno idéntico.",en:"Self-reproducing machine = máquina autoreproductiva"},
-{i:"🏺",q:"¿En qué época situa el folleto el torno del Antiguo Egipto?",o:["Siglo IX a.C.","Siglo XVIII d.C.","Siglo I d.C.","Siglo XX d.C."],e:"El folleto indica que en el Antiguo Egipto, en el siglo IX a.C., ya se usaba el torno.",en:"Ancient Egypt = Antiguo Egipto"},
-{i:"👥",q:"¿Cuántas personas operaban el torno en el Antiguo Egipto?",o:["Dos personas","Una persona","Cuatro personas","Diez personas"],e:"Una persona giraba la pieza con una cuerda tensa y la otra cortaba la madera o el metal con un buril.",en:"Rope = cuerda, tool = herramienta"},
-{i:"⚙️",q:"¿Qué tipo de máquina es el torno?",o:["Una máquina herramienta de mecanizado por arranque de viruta","Una máquina de soldadura por arco","Una máquina de fundición de metales","Una máquina de prensado de chapas"],e:"El torno es una máquina herramienta de mecanizado por arranque de viruta.",en:"Chip-removal machining = mecanizado por arranque de viruta"},
-{i:"🔩",q:"¿Qué tipo de piezas se moldean en el torno?",o:["Piezas cilíndricas","Piezas rectangulares","Chapas planas","Piezas cúbicas"],e:"Se usa para moldear piezas cilíndricas mediante el giro de la pieza contra una herramienta de corte fija.",en:"Cylindrical workpieces = piezas cilíndricas"},
-{i:"📉",q:"¿Qué operación del torno reduce el diámetro exterior de la pieza?",o:["Cilindrado","Refrentado","Roscado","Taladrado"],e:"El cilindrado reduce el diámetro exterior de la pieza.",en:"Turning = cilindrado"},
-{i:"🪞",q:"¿Qué operación deja plana la cara frontal de la pieza?",o:["Refrentado","Cilindrado","Taladrado","Roscado"],e:"El refrentado deja plana la cara frontal.",en:"Facing = refrentado"},
-{i:"🎚️",q:"¿Para qué sirve la Caja Norton?",o:["Regula las velocidades de avance y el paso para tallar roscas mecánicas","Sostiene las piezas largas","Sujeta y transmite el giro","Es la guía de fundición de los carros"],e:"La Caja Norton regula las velocidades de avance y el paso para tallar roscas mecánicas.",en:"Threading = roscado"},
-{i:"🌀",q:"¿Qué partes del torno sujetan y transmiten el giro?",o:["El plato y el husillo","La bancada","El contrapunto","La Caja Norton"],e:"El plato y el husillo sujetan y transmiten el giro.",en:"Spindle = husillo"},
-{i:"🛤️",q:"¿Qué función cumple la bancada?",o:["Es la guía de fundición para los carros","Sostiene piezas largas","Sujeta y transmite el giro","Regula las velocidades de avance"],e:"La bancada es la guía de fundición para los carros.",en:"Bed = bancada"},
-{i:"📏",q:"¿Para qué se usa el contrapunto?",o:["Para sostener piezas largas","Para transmitir el giro","Para remover viruta","Para regular el paso de las roscas"],e:"El contrapunto sostiene piezas largas.",en:"Tailstock = contrapunto"},
-{i:"🔪",q:"¿Cómo se llama la cuchilla que remueve la viruta mientras la pieza gira?",o:["Buril","Husillo","Plato","Bancada"],e:"El torno hace girar la pieza mientras una cuchilla (buril) remueve viruta con alta precisión.",en:"Cutting tool = herramienta de corte"}
-];
-const R=[
-{min:100,n:"Aura Celestial / Divina",e:"👑",r:"100%",c:"#ffc400",m:"¡Perfecto! Sos el maestro absoluto del torno. Hasta la bancada se inclina ante vos."},
-{min:85,n:"Aura Legendaria",e:"✨",r:"85 a 99%",c:"#ff7a1a",t:"CHAD",m:"Nivel CHAD del taller. Un error más y tocabas el cielo."},
-{min:70,n:"Aura Mística",e:"✨",r:"70 a 84%",c:"#a45cff",m:"Dominás el torno casi con magia. Pulí los detalles y subís."},
-{min:60,n:"Aura Despierta",e:"🌟",r:"60 a 69%",c:"#18c3d6",m:"Tu aura está despertando. Un repaso más y subís de nivel."},
-{min:35,n:"Aura Común",e:"🌀",r:"35 a 59%",c:"#8fa0bd",m:"Aura común. Repasá las partes del torno y volvé por la revancha."},
-{min:0,n:"Aura Extinta / Sin Aura",e:"☠️",r:"0 a 34%",c:"#e5484d",m:"Tu aura se apagó… Al taller a estudiar y después, ¡revancha!"}
-];
-const $=s=>document.querySelector(s),app=$("#app"),L="ABCD";
-const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let i=0,ok=0,pts=0,streak=0,name="",miss=[],locked=false,order=[];
-const show=h=>{app.innerHTML='<div class="screen">'+h+"</div>";window.scrollTo(0,0)};
-const score=()=>"⭐ "+pts+(streak>1?" 🔥 x"+streak:"");
-const ladder=c=>R.map((x,n)=>`<div class="rk${n===c?" me":""}" style="--rc:${x.c}"><span>${x.e}</span><b>${x.n}${x.t?" (nivel "+x.t+")":""}</b><em>${x.r}</em></div>`).join("");
 
-function cover(){show(`<div class="card hero"><div class="gears" aria-hidden="true"><span>⚙️</span><span>🔧</span><span>⚙️</span></div><h1>Torno<br>Quest</h1><p class="sub">El desafío del torno: ${Q.length} preguntas sacadas del folleto y un rango de aura</p></div>
-<div class="card"><dl class="info"><dt>Materia</dt><dd>English</dd><dt>Profesora</dt><dd>María Luz Ontivero</dd><dt>Alumnos</dt><dd>Torrez Leonel<br>Torres Alejo<br>Remisink Alex<br>Moretti Uriel</dd><dt>Curso</dt><dd>4°4°</dd><dt>Año</dt><dd>2026</dd><dt>Tema</dt><dd>El Torno / The Lathe: historia, componentes y usos técnicos</dd></dl></div>
-<button class="btn" data-a="brief">Empezar</button>`)}
+<body>
+
+<main class="app" id="app"></main>
+
+<script>
+
+const Q=[
+
+{
+i:"🔁",
+q:"What unique technical feature is associated with the lathe?",
+s:"¿Qué característica técnica única se asocia con el torno?",
+o:[
+["It can manufacture the parts needed to build another lathe.","Puede fabricar las piezas necesarias para construir otro torno."],
+["It works without electricity.","Funciona sin electricidad."],
+["It does not need cutting tools.","No necesita herramientas de corte."],
+["It works without an operator.","Funciona sin un operario."]
+],
+e:"A lathe can manufacture the mechanical parts needed to build another identical lathe.",
+t:"Un torno puede fabricar las piezas mecánicas necesarias para construir otro torno idéntico.",
+en:"Lathe = torno | Machine = máquina | Parts = piezas"
+},
+
+{
+i:"🏺",
+q:"When was the lathe used in Ancient Egypt?",
+s:"¿Cuándo se utilizaba el torno en el Antiguo Egipto?",
+o:[
+["In the 9th century BC.","En el siglo IX a.C."],
+["In the 18th century AD.","En el siglo XVIII d.C."],
+["In the 1st century AD.","En el siglo I d.C."],
+["In the 20th century AD.","En el siglo XX d.C."]
+],
+e:"According to the brochure, the lathe was already used in Ancient Egypt in the 9th century BC.",
+t:"Según el folleto, el torno ya se utilizaba en el Antiguo Egipto durante el siglo IX a.C.",
+en:"Ancient Egypt = Antiguo Egipto | Century = siglo"
+},
+
+{
+i:"👥",
+q:"How many people operated the ancient lathe?",
+s:"¿Cuántas personas operaban el torno antiguo?",
+o:[
+["Two people.","Dos personas."],
+["One person.","Una persona."],
+["Four people.","Cuatro personas."],
+["Three people.","Tres personas."]
+],
+e:"One person turned the workpiece with a rope, while another used a cutting tool.",
+t:"Una persona giraba la pieza con una cuerda, mientras otra utilizaba una herramienta de corte.",
+en:"People = personas | Rope = cuerda | Cutting tool = herramienta de corte"
+},
+
+{
+i:"⚙️",
+q:"What type of machine is a lathe?",
+s:"¿Qué tipo de máquina es el torno?",
+o:[
+["A chip-removal machine tool.","Una máquina herramienta de arranque de viruta."],
+["A welding machine.","Una máquina de soldadura."],
+["A casting machine.","Una máquina de fundición."],
+["A pressing machine.","Una máquina de prensado."]
+],
+e:"A lathe is a machine tool that shapes workpieces by removing material in the form of chips.",
+t:"El torno es una máquina herramienta que mecaniza piezas mediante el arranque de material en forma de viruta.",
+en:"Machine tool = máquina herramienta | Chip removal = arranque de viruta"
+},
+
+{
+i:"🔩",
+q:"What type of parts are mainly produced on a lathe?",
+s:"¿Qué tipo de piezas se fabrican principalmente en un torno?",
+o:[
+["Cylindrical parts.","Piezas cilíndricas."],
+["Square parts.","Piezas cuadradas."],
+["Flat sheets.","Chapas planas."],
+["Cubic parts.","Piezas cúbicas."]
+],
+e:"A lathe is mainly used to produce cylindrical parts by rotating the workpiece against a cutting tool.",
+t:"El torno se utiliza principalmente para fabricar piezas cilíndricas mediante el giro de la pieza contra una herramienta de corte.",
+en:"Cylindrical = cilíndrico | Workpiece = pieza de trabajo"
+},
+
+{
+i:"📉",
+q:"Which operation reduces the outside diameter of a workpiece?",
+s:"¿Qué operación reduce el diámetro exterior de una pieza?",
+o:[
+["Turning.","Cilindrado."],
+["Facing.","Refrentado."],
+["Threading.","Roscado."],
+["Drilling.","Taladrado."]
+],
+e:"Turning reduces the outside diameter of the workpiece using a cutting tool.",
+t:"El cilindrado reduce el diámetro exterior de la pieza utilizando una herramienta de corte.",
+en:"Turning = cilindrado | Diameter = diámetro"
+},
+
+{
+i:"🪞",
+q:"Which operation makes the front face of a workpiece flat?",
+s:"¿Qué operación permite dejar plana la cara frontal de una pieza?",
+o:[
+["Facing.","Refrentado."],
+["Turning.","Cilindrado."],
+["Drilling.","Taladrado."],
+["Threading.","Roscado."]
+],
+e:"Facing machines the front surface of a workpiece to make it flat.",
+t:"El refrentado mecaniza la superficie frontal de una pieza para dejarla plana.",
+en:"Facing = refrentado | Front face = cara frontal"
+},
+
+{
+i:"🎚️",
+q:"What is the Norton gearbox used for?",
+s:"¿Para qué sirve la Caja Norton?",
+o:[
+["To adjust feed rates and thread pitches.","Para regular los avances y los pasos de rosca."],
+["To support long workpieces.","Para sostener piezas largas."],
+["To hold the workpiece.","Para sujetar la pieza."],
+["To transmit rotation.","Para transmitir el giro."]
+],
+e:"The Norton gearbox adjusts feed rates and allows the selection of thread pitches.",
+t:"La Caja Norton regula las velocidades de avance y permite seleccionar los pasos necesarios para realizar roscas.",
+en:"Norton gearbox = Caja Norton | Feed rate = velocidad de avance | Thread pitch = paso de rosca"
+},
+
+{
+i:"🌀",
+q:"Which components hold the workpiece and transmit rotation?",
+s:"¿Qué componentes sujetan la pieza y transmiten el giro?",
+o:[
+["The chuck and the spindle.","El plato y el husillo."],
+["The bed.","La bancada."],
+["The tailstock.","El contrapunto."],
+["The Norton gearbox.","La Caja Norton."]
+],
+e:"The chuck holds the workpiece and the spindle transmits rotational movement.",
+t:"El plato sujeta la pieza y el husillo transmite el movimiento de rotación.",
+en:"Chuck = plato | Spindle = husillo | Rotation = rotación"
+},
+
+{
+i:"🛤️",
+q:"What is the function of the lathe bed?",
+s:"¿Cuál es la función de la bancada del torno?",
+o:[
+["To guide and support the carriages.","Guiar y sostener los carros."],
+["To support long workpieces.","Sostener piezas largas."],
+["To transmit rotation.","Transmitir el giro."],
+["To adjust thread pitches.","Regular los pasos de rosca."]
+],
+e:"The bed is the main structure that guides and supports the lathe carriages.",
+t:"La bancada es la estructura principal que guía y sostiene los carros del torno.",
+en:"Bed = bancada | Carriage = carro | Structure = estructura"
+},
+
+{
+i:"📏",
+q:"What is the tailstock used for?",
+s:"¿Para qué se utiliza el contrapunto?",
+o:[
+["To support long workpieces.","Para sostener piezas largas."],
+["To transmit rotation.","Para transmitir el giro."],
+["To remove chips.","Para remover viruta."],
+["To adjust thread pitches.","Para regular los pasos de rosca."]
+],
+e:"The tailstock is used to support long workpieces during machining.",
+t:"El contrapunto sirve para apoyar y sostener piezas largas durante el mecanizado.",
+en:"Tailstock = contrapunto | Support = sostener | Machining = mecanizado"
+},
+
+{
+i:"🔪",
+q:"What is the cutting tool that removes material called?",
+s:"¿Cómo se llama la herramienta de corte que remueve material?",
+o:[
+["Cutting tool (tool bit).","Buril."],
+["Spindle.","Husillo."],
+["Chuck.","Plato."],
+["Bed.","Bancada."]
+],
+e:"The cutting tool removes material while the workpiece rotates.",
+t:"El buril es la herramienta de corte que remueve material mientras la pieza gira.",
+en:"Cutting tool = herramienta de corte | Chips = virutas | Workpiece = pieza de trabajo"
+}
+
+];
+
+const R=[
+{
+min:100,
+n:"Celestial Aura",
+s:"Aura Celestial / Divina",
+e:"👑",
+r:"100%",
+c:"#ffc400",
+m:"Perfect! You are the absolute master of the lathe!",
+t:"¡Perfecto! ¡Sos el maestro absoluto del torno!"
+},
+{
+min:85,
+n:"Legendary Aura",
+s:"Aura Legendaria",
+e:"✨",
+r:"85 to 99%",
+c:"#ff7a1a",
+t:"CHAD",
+m:"Workshop CHAD level! You are almost perfect!",
+t2:"¡Nivel CHAD del taller! ¡Estás casi en la perfección!"
+},
+{
+min:70,
+n:"Mystical Aura",
+s:"Aura Mística",
+e:"✨",
+r:"70 to 84%",
+c:"#a45cff",
+m:"You almost master the lathe like magic!",
+t:"¡Dominás el torno casi con magia!"
+},
+{
+min:60,
+n:"Awakened Aura",
+s:"Aura Despierta",
+e:"🌟",
+r:"60 to 69%",
+c:"#18c3d6",
+m:"Your aura is awakening. Keep studying!",
+t:"Tu aura está despertando. ¡Seguí estudiando!"
+},
+{
+min:35,
+n:"Common Aura",
+s:"Aura Común",
+e:"🌀",
+r:"35 to 59%",
+c:"#8fa0bd",
+m:"Review the lathe components and try again!",
+t:"¡Repasá los componentes del torno y volvé a intentarlo!"
+},
+{
+min:0,
+n:"Extinct Aura",
+s:"Aura Extinta / Sin Aura",
+e:"☠️",
+r:"0 to 34%",
+c:"#e5484d",
+m:"Your aura has disappeared. Study and try again!",
+t:"Tu aura se apagó. ¡Estudiá y volvé por la revancha!"
+}
+];
+
+const $=s=>document.querySelector(s);
+const app=$("#app");
+const L="ABCD";
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;"
+}[c]));
+
+let i=0,ok=0,pts=0,streak=0,name="",miss=[],locked=false,order=[];
+
+const show=h=>{
+app.innerHTML='<div class="screen">'+h+'</div>';
+window.scrollTo(0,0)
+};
+
+const score=()=>"⭐ "+pts+(streak>1?" 🔥 x"+streak:"");
+
+const bilingual=(en,es)=>`
+<span class="en">${en}</span>
+<span class="es">${es}</span>
+`;
+
+const ladder=c=>R.map((x,n)=>`
+<div class="rk${n===c?" me":""}" style="--rc:${x.c}">
+<span>${x.e}</span>
+<b>${x.n}<br><span class="es">${x.s}</span>${x.t?" (Level "+x.t+")":""}</b>
+<em>${x.r}</em>
+</div>
+`).join("");
+
+function cover(){
+
+show(`
+<div class="card hero">
+<div class="gears" aria-hidden="true">
+<span>⚙️</span>
+<span>🔧</span>
+<span>⚙️</span>
+</div>
+
+<h1>Lathe<br>Quest</h1>
+
+<p class="sub">
+The Lathe Challenge
+<br>
+El desafío del torno
+</p>
+
+<p class="sub">
+${Q.length} bilingual questions
+<br>
+${Q.length} preguntas bilingües
+</p>
+</div>
+
+<div class="card">
+<dl class="info">
+
+<dt>Subject</dt>
+<dd>English<br><span class="es">Materia: Inglés</span></dd>
+
+<dt>Teacher</dt>
+<dd>María Luz Ontivero<br><span class="es">Profesora</span></dd>
+
+<dt>Students</dt>
+<dd>
+Torrez Leonel<br>
+Torres Alejo<br>
+Remisink Alex<br>
+Moretti Uriel
+</dd>
+
+<dt>Course</dt>
+<dd>4°4°<br><span class="es">Curso</span></dd>
+
+<dt>Year</dt>
+<dd>2026<br><span class="es">Año</span></dd>
+
+<dt>Topic</dt>
+<dd>
+The Lathe: History, Components and Technical Uses
+<br>
+<span class="es">El torno: historia, componentes y usos técnicos</span>
+</dd>
+
+</dl>
+</div>
+
+<button class="btn" data-a="brief">
+Start / Empezar
+</button>
+`);
+}
 
 function ask(){
- const q=Q[i];locked=false;order=q.o.map((_,k)=>k);
- if(order.length>2)for(let k=order.length-1;k>0;k--){const j=Math.random()*(k+1)|0;[order[k],order[j]]=[order[j],order[k]]}
- show(`<div class="top"><span class="chip">Pregunta ${i+1} de ${Q.length}</span><span class="chip" id="sc">${score()}</span></div>
-<div class="bar"><i style="width:${i/Q.length*100}%"></i></div>
-<div class="card"><div class="ico">${q.i}</div><h2>${q.q}</h2>${order.map((k,n)=>`<button class="opt" data-a="pick" data-k="${k}"><b>${L[n]}</b><span>${q.o[k]}</span></button>`).join("")}<div id="fb"></div></div>`)}
+
+const q=Q[i];
+
+locked=false;
+order=q.o.map((_,k)=>k);
+
+if(order.length>2){
+for(let k=order.length-1;k>0;k--){
+const j=Math.random()*(k+1)|0;
+[order[k],order[j]]=[order[j],order[k]]
+}
+}
+
+show(`
+<div class="top">
+<span class="chip">Question ${i+1} of ${Q.length}<br>Pregunta ${i+1} de ${Q.length}</span>
+<span class="chip" id="sc">${score()}</span>
+</div>
+
+<div class="bar">
+<i style="width:${i/Q.length*100}%"></i>
+</div>
+
+<div class="card">
+
+<div class="ico">${q.i}</div>
+
+<h2 class="question-text">
+${bilingual(q.q,q.s)}
+</h2>
+
+${order.map((k,n)=>`
+<button class="opt" data-a="pick" data-k="${k}">
+<b>${L[n]}</b>
+<span class="words">
+<span class="en">${q.o[k][0]}</span>
+<span class="es">${q.o[k][1]}</span>
+</span>
+</button>
+`).join("")}
+
+<div id="fb"></div>
+
+</div>
+`);
+}
 
 const act={
- brief(){show(`<div class="card"><h2>Cómo se juega 🎮</h2><ul class="rules"><li>📖 Tené a mano el <b>folleto del torno</b>: todas las respuestas están ahí.</li><li>🧩 <b>${Q.length} preguntas</b> de opción múltiple, una por pantalla.</li><li>⚡ Tocá tu respuesta y mirá al instante si acertaste.</li><li>🏆 Al final te toca un <b>rango de aura</b>. ¿Llegás a 👑 Celestial?</li></ul><label class="lab" for="nm">Tu apodo (opcional)</label><input id="nm" maxlength="18" placeholder="Ej: Maquinista Pro" autocomplete="off"></div>
-<details class="card"><summary>🔮 Ver los rangos</summary>${ladder(-1)}</details><button class="btn" data-a="start">¡Vamos!</button>`)},
- start(){name=($("#nm").value||"").trim();i=ok=pts=streak=0;miss=[];ask()},
- pick(b){
-  if(locked)return;locked=true;
-  const q=Q[i],good=+b.dataset.k===0,last=i===Q.length-1;
-  document.querySelectorAll(".opt").forEach(o=>{o.disabled=true;if(+o.dataset.k===0)o.classList.add("ok")});
-  if(good){ok++;pts+=100;streak++}else{streak=0;miss.push(i);b.classList.add("bad")}
-  $("#sc").textContent=score();
-  if(navigator.vibrate)navigator.vibrate(good?25:[50,40,50]);
-  $("#fb").innerHTML=`<div class="fb ${good?"ok":"bad"}"><strong>${good?"¡Correcto! +100 ⭐":"¡Uy! La correcta era la "+L[order.indexOf(0)]}</strong><p>${q.e}</p><span class="chip">🇬🇧 ${q.en}</span></div><button class="btn" data-a="next">${last?"🏆 Ver mi rango":"Siguiente ▶"}</button>`;
-  const nb=$("[data-a=next]");nb.focus({preventScroll:true});nb.scrollIntoView({behavior:"smooth",block:"nearest"})},
- next(){++i<Q.length?ask():end()},
- again(){cover()}
+
+brief(){
+
+show(`
+<div class="card">
+
+<h2>How to Play / Cómo se juega 🎮</h2>
+
+<ul class="rules">
+
+<li>
+📖 <b>Use the lathe brochure.</b>
+<br>
+<span class="es">Utilizá el folleto del torno.</span>
+</li>
+
+<li>
+🧩 <b>Answer ${Q.length} multiple-choice questions.</b>
+<br>
+<span class="es">Respondé ${Q.length} preguntas de opción múltiple.</span>
+</li>
+
+<li>
+⚡ <b>Select an answer and check your result.</b>
+<br>
+<span class="es">Seleccioná una respuesta y comprobá tu resultado.</span>
+</li>
+
+<li>
+🏆 <b>Get your final aura rank!</b>
+<br>
+<span class="es">¡Conseguí tu rango de aura final!</span>
+</li>
+
+</ul>
+
+<label class="lab" for="nm">
+Your nickname / Tu apodo (optional / opcional)
+</label>
+
+<input id="nm" maxlength="18" placeholder="Example: Lathe Master / Ejemplo: Maestro del torno" autocomplete="off">
+
+</div>
+
+<details class="card">
+<summary>🔮 View the ranks / Ver los rangos</summary>
+${ladder(-1)}
+</details>
+
+<button class="btn" data-a="start">
+Let's go! / ¡Vamos!
+</button>
+`)
+},
+
+start(){
+
+name=($("#nm").value||"").trim();
+
+i=ok=pts=streak=0;
+miss=[];
+
+ask()
+},
+
+pick(b){
+
+if(locked)return;
+
+locked=true;
+
+const q=Q[i];
+const good=+b.dataset.k===0;
+const last=i===Q.length-1;
+
+document.querySelectorAll(".opt").forEach(o=>{
+o.disabled=true;
+if(+o.dataset.k===0)o.classList.add("ok")
+});
+
+if(good){
+ok++;
+pts+=100;
+streak++
+}else{
+streak=0;
+miss.push(i);
+b.classList.add("bad")
+}
+
+$("#sc").textContent=score();
+
+if(navigator.vibrate){
+navigator.vibrate(good?25:[50,40,50])
+}
+
+const correctLetter=L[order.indexOf(0)];
+
+$("#fb").innerHTML=`
+
+<div class="fb ${good?"ok":"bad"}">
+
+<strong>
+${good?"Correct! +100 ⭐":"Incorrect! The correct answer was "+correctLetter}
+<br>
+<span class="es">
+${good?"¡Correcto! +100 ⭐":"¡Incorrecto! La respuesta correcta era "+correctLetter}
+</span>
+</strong>
+
+<p>
+${bilingual(q.e,q.t)}
+</p>
+
+<span class="chip">
+🇬🇧 Vocabulary / Vocabulario
+<br>
+${q.en}
+</span>
+
+</div>
+
+<button class="btn" data-a="next">
+${last?"🏆 See my rank / Ver mi rango":"Next / Siguiente ▶"}
+</button>
+`;
+
+const nb=$("[data-a=next]");
+nb.focus({preventScroll:true});
+nb.scrollIntoView({behavior:"smooth",block:"nearest"})
+},
+
+next(){
+
+++i<Q.length?ask():end()
+},
+
+again(){
+cover()
+}
+
 };
 
 function end(){
- const raw=ok/Q.length*100,ri=R.findIndex(x=>raw>=x.min),r=R[ri];
- show(`<div class="card res" style="--rc:${r.c}"><p class="sub">${name?"¡Bien jugado, "+esc(name)+"!":"¡Terminaste el desafío!"}</p><div class="big">${r.e}</div><h1>${r.n}</h1>${r.t?`<span class="chip chad">Nivel ${r.t}</span>`:""}<div class="pct">${Math.round(raw)}%</div><p class="sub">${ok} de ${Q.length} correctas, ⭐ ${pts}</p><p><b>${r.m}</b></p></div>
-<div class="card"><h3>🏅 Tabla de rangos</h3>${ladder(ri)}</div>
-${miss.length?`<details class="card"><summary>📚 Repasar mis errores (${miss.length})</summary>${miss.map(m=>`<p class="rev"><b>${Q[m].q}</b><br>✅ ${Q[m].o[0]}</p>`).join("")}</details>`:""}
-<div class="card">🔁 <b>Dato curioso del folleto</b><br>El torno es la única máquina capaz de reproducirse a sí misma: con un torno se pueden fabricar las piezas para construir otro torno idéntico.</div>
-<button class="btn" data-a="again">🔁 Jugar de nuevo</button>`)}
 
-app.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b)act[b.dataset.a](b)});
-addEventListener("keydown",e=>{if(e.key.length!==1)return;let n="1234".indexOf(e.key);if(n<0)n="abcd".indexOf(e.key.toLowerCase());const b=document.querySelectorAll(".opt")[n];if(n>-1&&b&&!b.disabled)b.click()});
+const raw=ok/Q.length*100;
+const ri=R.findIndex(x=>raw>=x.min);
+const r=R[ri];
+
+show(`
+
+<div class="card res" style="--rc:${r.c}">
+
+<p class="sub">
+${name?"Well played, "+esc(name)+"! / ¡Bien jugado, "+esc(name)+"!":"Challenge completed! / ¡Desafío terminado!"}
+</p>
+
+<div class="big">${r.e}</div>
+
+<h1>${r.n}</h1>
+<p class="sub">${r.s}</p>
+
+${r.t?`<span class="chip chad">Level ${r.t} / Nivel ${r.t}</span>`:""}
+
+<div class="pct">${Math.round(raw)}%</div>
+
+<p class="sub">
+${ok} of ${Q.length} correct answers
+<br>
+${ok} de ${Q.length} respuestas correctas
+</p>
+
+<p>
+<b>${r.m}</b>
+<br>
+<span class="es">${r.t2||r.t}</span>
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🏅 Aura Ranking / Tabla de rangos</h3>
+
+${ladder(ri)}
+
+</div>
+
+${miss.length?`
+
+<details class="card">
+
+<summary>
+📚 Review my mistakes / Repasar mis errores (${miss.length})
+</summary>
+
+${miss.map(m=>`
+<p class="rev">
+<b>${Q[m].q}</b>
+<br>
+<span class="es">${Q[m].s}</span>
+<br>
+✅ ${Q[m].o[0][0]}
+<br>
+<span class="es">${Q[m].o[0][1]}</span>
+</p>
+`).join("")}
+
+</details>
+
+`:""}
+
+<div class="card">
+
+<b>🔁 Interesting fact / Dato curioso</b>
+
+<p>
+The lathe can manufacture the parts needed to build another identical lathe.
+</p>
+
+<p class="es">
+El torno puede fabricar las piezas necesarias para construir otro torno idéntico.
+</p>
+
+</div>
+
+<button class="btn" data-a="again">
+🔁 Play again / Jugar de nuevo
+</button>
+
+`);
+}
+
+app.addEventListener("click",e=>{
+const b=e.target.closest("[data-a]");
+if(b)act[b.dataset.a](b)
+});
+
+addEventListener("keydown",e=>{
+
+if(e.key.length!==1)return;
+
+let n="1234".indexOf(e.key);
+
+if(n<0)n="abcd".indexOf(e.key.toLowerCase());
+
+const b=document.querySelectorAll(".opt")[n];
+
+if(n>-1&&b&&!b.disabled)b.click()
+
+});
+
 cover();
+
 </script>
+
 </body>
 </html>
